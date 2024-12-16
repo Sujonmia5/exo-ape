@@ -1,0 +1,30 @@
+.hero_link {
+  @apply w-fit h-fit transition-all;
+}
+
+.hero_link .link_arrow {
+  @apply overflow-hidden;
+}
+
+.hero_link .link_arrow .circle {
+  @apply scale-[0.3] size-7 top-0 -right-2 transition-all rounded-full absolute bg-transparent border-[1px] border-black w-full h-full;
+}
+
+.hero_link .link_arrow .icon {
+  @apply absolute -left-7 top-1/2 -translate-y-1/2 transition-all;
+  color: #fff;
+}
+
+.hero_link:hover .link_arrow .circle {
+  @apply scale-100 right-0 bg-black;
+}
+
+.hero_link:hover .link_arrow .icon {
+  @apply left-1/2 -translate-x-1/2 z-10 text-white;
+}
+.hero_link .link_text .link_line {
+  @apply transition-all;
+}
+.hero_link:hover .link_text .link_line {
+  @apply translate-x-full;
+}

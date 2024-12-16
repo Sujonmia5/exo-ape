@@ -1,0 +1,45 @@
+@font-face {
+  font-family: Lausanne;
+  src: url("./assets/font/TWKLausanne-300.b6399e7.ttf");
+  font-style: normal;
+  font-weight: 300;
+}
+@font-face {
+  font-family: Lausanne;
+  src: url("./assets/font/TWKLausanne-400.c74d82a.ttf");
+  font-style: normal;
+  font-weight: 400;
+}
+@font-face {
+  font-family: Lausanne;
+  src: url("./assets/font/TWKLausanne-500.eb0ea77.ttf");
+  font-style: normal;
+  font-weight: 500;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  overflow: auto; /* Allow scrolling */
+  -ms-overflow-style: none; /* Hide scrollbar in IE and Edge */
+  scrollbar-width: none; /* Hide scrollbar in Firefox */
+}
+html::-webkit-scrollbar {
+  display: none; /* Hide scrollbar in Chrome, Safari, and Edge */
+  width: none;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  /* color: white; */
+}
