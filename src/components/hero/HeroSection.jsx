@@ -2,11 +2,12 @@ import { BiRightArrowAlt } from "react-icons/bi";
 import styles from "./Hero.module.css";
 import { motion } from "motion/react";
 import { UpdateFollower } from "react-mouse-follower";
-import { useContext, useEffect, useRef } from "react";
+import { useContext, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Power4 } from "gsap/all";
 import { AppContext } from "../../context/context";
+import { useGSAP } from "@gsap/react";
 
 const HeroSection = () => {
   const { heading_Text1, heading_Text2, heading_Text3 } =
@@ -21,24 +22,23 @@ const HeroSection = () => {
     { title: "experience", ref: heading_Text3 },
   ];
 
-  useEffect(() => {
+  useGSAP(() => {
     gsap.registerPlugin(ScrollTrigger);
     const mm = gsap.matchMedia();
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: headerContainerRef.current,
+        start: "top 30%",
+        end: "top top",
+        scrub: true,
+      },
+    });
     mm.add("(max-width: 767px)", () => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: headerContainerRef.current,
-          start: "top 25%",
-          scrub: true,
-        },
-      });
-
       tl.to(
         hp_text.current,
         {
           rotate: -2,
           opacity: 0,
-          duration: 0.1,
           ease: Power4.easeOut,
         },
         "h1"
@@ -47,10 +47,8 @@ const HeroSection = () => {
       tl.to(
         heading_Text1.current,
         {
-          rotate: -45,
           opacity: 0,
           y: "-100%",
-          duration: 0.2,
           ease: [0.22, 1, 0.36, 1],
           transformOrigin: "top left",
           display: "none",
@@ -60,10 +58,8 @@ const HeroSection = () => {
       tl.to(
         heading_Text2.current,
         {
-          rotate: -45,
           opacity: 0,
           y: "-100%",
-          duration: 0.2,
           ease: [0.22, 1, 0.36, 1],
           transformOrigin: "top left",
           display: "none",
@@ -73,10 +69,8 @@ const HeroSection = () => {
       tl.to(
         heading_Text3.current,
         {
-          rotate: -45,
           opacity: 0,
           y: "-100%",
-          duration: 0.2,
           ease: [0.22, 1, 0.36, 1],
           transformOrigin: "top left",
           display: "none",
@@ -239,7 +233,7 @@ const HeroSection = () => {
                       }}
                     >
                       <a
-                        className=" pointer-events-auto capitalize w-fit"
+                        className="pointer-events-auto capitalize w-fit relative after:content-[''] after:absolute after:w-full after:h-[1px] after:bg-white after:left-0 after:-bottom-1 after:transition-transform after:origin-right after:ease-in-out after:duration-500 after:scale-x-0 hover:after:origin-left hover:after:scale-x-100"
                         href=""
                       >
                         {item}
@@ -257,7 +251,10 @@ const HeroSection = () => {
                         scale: 0,
                       }}
                     >
-                      <a className=" pointer-events-auto w-fit" href="">
+                      <a
+                        className=" pointer-events-auto w-fit relative after:content-[''] after:absolute after:w-full after:h-[1px] after:bg-white after:left-0 after:-bottom-1 after:transition-transform after:origin-right after:ease-in-out after:duration-500 after:scale-x-0 hover:after:origin-left hover:after:scale-x-100"
+                        href=""
+                      >
                         {item}
                       </a>
                     </UpdateFollower>

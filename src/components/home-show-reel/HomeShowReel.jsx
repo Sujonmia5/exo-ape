@@ -1,8 +1,9 @@
 import { UpdateFollower } from "react-mouse-follower";
 import { AppContext } from "../../context/context";
-import { useContext, useEffect, useRef } from "react";
+import { useContext, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 
 const HomeShowReel = () => {
   const { setIsOpen } = useContext(AppContext);
@@ -11,7 +12,7 @@ const HomeShowReel = () => {
   const textPlay = useRef(null);
   const textReel = useRef(null);
 
-  useEffect(() => {
+  useGSAP(() => {
     gsap.registerPlugin(ScrollTrigger);
     const mm = gsap.matchMedia();
 
@@ -22,7 +23,7 @@ const HomeShowReel = () => {
         scrub: 2,
         pin: true,
         // pinSpacing: true,
-        markers: true,
+        // markers: true,
       },
     });
 
@@ -36,8 +37,8 @@ const HomeShowReel = () => {
       // Animations for mobile and smaller device
 
       tl.to(videoElement.current, { width: "100%", height: "40%" }, "a");
-      tl.to(textPlay.current, { x: 95 }, "a");
-      tl.to(textReel.current, { x: -95 }, "a");
+      tl.to(textPlay.current, { x: 70 }, "a");
+      tl.to(textReel.current, { x: -70 }, "a");
     });
 
     return () => {
@@ -71,7 +72,7 @@ const HomeShowReel = () => {
       >
         <div
           onClick={() => setIsOpen(true)}
-          className="h-[70vh] sm:min-h-screen mx-auto relative"
+          className="min-h-screen mx-auto relative"
         >
           {/* Reel text */}
           <div className="w-1/2 mx-auto h-full flex flex-col gap-10">
@@ -94,13 +95,13 @@ const HomeShowReel = () => {
             <h1 className="w-1/2 h-60 mx-auto flex items-center justify-center z-10 absolute top-1/2  -translate-y-1/2 ">
               <div
                 ref={textPlay}
-                className="font-Lausanne capitalize text-[10vw] absolute -left-[40%] font-normal"
+                className="font-Lausanne capitalize text-[13vw] sm:text-[10vw] absolute -left-[40%] font-normal"
               >
                 play
               </div>
               <div
                 ref={textReel}
-                className="font-Lausanne capitalize text-[10vw] absolute -right-[40%] font-normal"
+                className="font-Lausanne capitalize text-[13vw] sm:text-[10vw] absolute -right-[40%] font-normal"
               >
                 Reel
               </div>
@@ -117,7 +118,7 @@ const HomeShowReel = () => {
             autoPlay
             muted
             loop
-            className="w-[50vw] sm:w-[400px] sm:h-48 object-cover absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 opacity-30"
+            className="w-[50vw] sm:w-[400px] h-24 sm:h-48 object-cover absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 opacity-30"
             src="https://res.cloudinary.com/dwvt17wew/video/upload/v1733895164/9e976370_uprsxj.mp4"
           ></video>
         </div>

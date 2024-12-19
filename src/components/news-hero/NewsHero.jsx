@@ -1,9 +1,10 @@
 import { BiRightArrowAlt } from "react-icons/bi";
 import styles from "../work/project.module.css";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion } from "motion/react";
+import { useGSAP } from "@gsap/react";
 
 const NewsHero = () => {
   const newsContainerRef = useRef(null);
@@ -12,15 +13,16 @@ const NewsHero = () => {
   const rightSideVideo = useRef(null);
   const rightSideImage = useRef(null);
 
-  useEffect(() => {
+  useGSAP(() => {
     gsap.registerPlugin(ScrollTrigger);
 
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: newsContainerRef.current,
-        start: "top 75%",
+        start: "30% 75%",
         // end: "bottom 70%",
         scrub: 1,
+        // markers: true,
       },
     });
     tl.to(
@@ -70,7 +72,7 @@ const NewsHero = () => {
           />
           <div
             ref={leftSideVideo}
-            className="w-[30vw] sm:w-[25vw] h-[16.8vw] sm:h-[14vw] bg-sky-400 absolute -left-[30%] sm:-left-3/4 top-[44%] -translate-y-1/2"
+            className="w-[30vw] sm:w-[25vw] h-[16.8vw] sm:h-[14vw] absolute -left-[40%] sm:-left-3/4 top-[44%] -translate-y-1/2"
           >
             <video
               autoPlay
@@ -81,7 +83,7 @@ const NewsHero = () => {
           </div>
           <div
             ref={rightSideImage}
-            className="w-[19.2vw] sm:w-[15vw] h-[26.2vw] sm:h-[19vw] bg-blue-500 absolute left-[80%] top-[30%] -translate-y-1/2"
+            className="w-[19.2vw] sm:w-[15vw] h-[26.2vw] sm:h-[19vw] absolute left-[80%] top-[30%] -translate-y-1/2"
           >
             <img
               src="https://res.cloudinary.com/dwvt17wew/image/upload/v1734013924/news2_uw5p1b.jpg"
@@ -90,7 +92,7 @@ const NewsHero = () => {
           </div>
           <div
             ref={leftSideImage}
-            className="w-[35.2vw] sm:w-[26vw] h-[24.2vw] sm:h-[17.63vw] absolute -left-36 sm:-left-[80%] top-full sm:-bottom-72 "
+            className="w-[35.2vw] sm:w-[26vw] h-[24.2vw] sm:h-[17.63vw] absolute -left-20 sm:-left-[80%] top-full sm:-bottom-72 "
           >
             <img
               className="w-full h-full object-cover"
@@ -100,7 +102,7 @@ const NewsHero = () => {
           </div>
           <div
             ref={rightSideVideo}
-            className="w-[25.2vw] sm:w-[26vw] h-[25vw] sm:h-[26vw] bg-blue-900 absolute -right-24 sm:-right-[70%] top-full sm:-bottom-72 "
+            className="w-[25.2vw] sm:w-[25.8vw] h-[24.5vw] sm:h-[26vw] absolute -right-16 sm:-right-[70%] top-full sm:-bottom-72 "
           >
             <video
               autoPlay
@@ -117,9 +119,9 @@ const NewsHero = () => {
       <div
         data-scroll
         data-scroll-speed="-0.2"
-        className="-mt-10 sm:mt-10 text-inherit"
+        className="-mt-10 sm:mt-10 text-inherit "
       >
-        <div className="flex flex-col justify-center items-center">
+        <div className="flex flex-col justify-center items-center pb-32 pt-16 sm:pt-0 sm:pb-0">
           <h1 className="text-center flex items-center justify-center gap-1 font-Lausanne capitalize font-normal text-base">
             <svg
               viewBox="0 0 12 12"
@@ -136,33 +138,27 @@ const NewsHero = () => {
             </svg>
             <div>in the media</div>
           </h1>
-
-          <h1 className="max-w-min my-5 sm:my-10 flex flex-col items-center justify-center">
-            {["Spread", "the News"].map((item, i) => (
-              <div key={i} className="w-fit overflow-hidden h-[10vw]">
-                <motion.div
-                  initial={{
-                    rotate: 90,
-                    opacity: 0,
-                    y: "100%",
-                  }}
-                  whileInView={{
-                    rotate: 0,
-                    opacity: 1,
-                    y: 0,
-                  }}
-                  viewport={{ once: true }}
-                  transition={{
-                    duration: 0.8,
-                    ease: [0.22, 1, 0.36, 1],
-                  }}
-                  className="origin-top-left  text-[15vw] sm:text-[9vw] capitalize font-Lausanne leading-none tracking-tighter text-nowrap"
-                >
-                  {item}
-                </motion.div>
-              </div>
-            ))}
-          </h1>
+          <div>
+            <h2 className="text-start sm:text-center sm:text-[10vw] font-Lausanne font-normal text-[12.8vw] leading-[0.9] sm:mb-10">
+              <motion.div
+                initial={{ y: 100, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.8 }}
+                viewport={{ once: true }}
+                className="text-center"
+              >
+                Spread
+              </motion.div>
+              <motion.div
+                initial={{ y: 100, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.8 }}
+                className="text-center"
+              >
+                the News
+              </motion.div>
+            </h2>
+          </div>
 
           <p className="text-center sm:text-[1.6vw] w-60 sm:w-[500px] mx-auto capitalize font-Lausanne font-light leading-normal my-10 overflow-hidden">
             <motion.span
