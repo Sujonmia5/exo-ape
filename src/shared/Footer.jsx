@@ -2,9 +2,14 @@ import { NavLink } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="bg-[#070707] text-[#e0ccbb] relative w-full min-h-fit">
+    <footer
+      id="section5"
+      data-scroll
+      data-scroll-speed="-0.4"
+      className="bg-[#070707] text-[#e0ccbb] relative w-full min-h-fit z-[1] pb-10"
+    >
       <div className="max-w-screen-2xl mx-auto px-5 sm:px-16 pt-10 pb-0 sm:pt-10 space-y-10 relative z-20 overflow-hidden">
-        <h1 className="text-[11vw] font-normal leading-none tracking-normal mt-16">
+        <h1 className="text-[11vw] font-medium leading-none tracking-normal mt-16">
           <div>Our</div>
           <div>Story</div>
         </h1>

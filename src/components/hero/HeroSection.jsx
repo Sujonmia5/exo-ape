@@ -2,8 +2,89 @@ import { BiRightArrowAlt } from "react-icons/bi";
 import styles from "./Hero.module.css";
 import { motion } from "motion/react";
 import { UpdateFollower } from "react-mouse-follower";
+import { useContext, useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Power4 } from "gsap/all";
+import { AppContext } from "../../context/context";
 
 const HeroSection = () => {
+  const { heading_Text1, heading_Text2, heading_Text3 } =
+    useContext(AppContext);
+  const headerContainerRef = useRef(null);
+  const hp_text = useRef(null);
+
+  // heading data
+  const headingData = [
+    { title: "Digital", ref: heading_Text1 },
+    { title: "Design", ref: heading_Text2 },
+    { title: "experience", ref: heading_Text3 },
+  ];
+
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+    const mm = gsap.matchMedia();
+    mm.add("(max-width: 767px)", () => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: headerContainerRef.current,
+          start: "top 25%",
+          scrub: true,
+        },
+      });
+
+      tl.to(
+        hp_text.current,
+        {
+          rotate: -2,
+          opacity: 0,
+          duration: 0.1,
+          ease: Power4.easeOut,
+        },
+        "h1"
+      );
+
+      tl.to(
+        heading_Text1.current,
+        {
+          rotate: -45,
+          opacity: 0,
+          y: "-100%",
+          duration: 0.2,
+          ease: [0.22, 1, 0.36, 1],
+          transformOrigin: "top left",
+          display: "none",
+        },
+        "h1"
+      );
+      tl.to(
+        heading_Text2.current,
+        {
+          rotate: -45,
+          opacity: 0,
+          y: "-100%",
+          duration: 0.2,
+          ease: [0.22, 1, 0.36, 1],
+          transformOrigin: "top left",
+          display: "none",
+        },
+        "h1"
+      );
+      tl.to(
+        heading_Text3.current,
+        {
+          rotate: -45,
+          opacity: 0,
+          y: "-100%",
+          duration: 0.2,
+          ease: [0.22, 1, 0.36, 1],
+          transformOrigin: "top left",
+          display: "none",
+        },
+        "h1"
+      );
+    });
+  });
   return (
     <UpdateFollower
       className="sample"
@@ -15,7 +96,7 @@ const HeroSection = () => {
         backgroundElement: (
           <div style={{ width: "100%" }}>
             <div className="w-full h-full rounded-full flex items-center justify-center">
-              <p className="text-[2px] text-white font-Lausanne font-medium">
+              <p className="text-[2px]  text-white font-Lausanne font-medium">
                 Scroll
               </p>
             </div>
@@ -24,7 +105,7 @@ const HeroSection = () => {
       }}
     >
       <div
-        id="hero-section"
+        id="section1"
         className="w-full relative h-[108vh] sm:h-full text-white"
       >
         {/* Background Image */}
@@ -34,20 +115,26 @@ const HeroSection = () => {
             data-scroll-speed="-1"
             src="https://res.cloudinary.com/dwvt17wew/image/upload/v1733895187/filters_quality_90_qqi5t0.jpg"
             alt=""
-            className="sticky top-0 w-full h-full object-cover"
+            className="sticky top-0 left-0 w-full h-full object-cover"
           />
         </div>
         {/* Header contents */}
-        <div className="absolute top-[38%] sm:top-[43%] md:top-[22%] left-[5vw] md:left-[6vw] lg:left-[7vw] xl:left-[8vw] right-[5vw] md:right-[6vw] lg:right-[7vw] xl:right-[8vw] h-full z-50 pointer-events-none">
+        <div
+          ref={headerContainerRef}
+          className="absolute top-[38%] sm:top-[43%] md:top-[22%] left-[5vw] md:left-[6vw] lg:left-[7vw] xl:left-[8vw] right-[5vw] md:right-[6vw] lg:right-[7vw] xl:right-[8vw] h-full z-50 pointer-events-none"
+        >
           <div className="">
-            <p className="text-[4.4vw] sm:text-[2.8vw] md:text-[1.6vw] font-Lausanne font-normal leading-normal capitalize tracking-wide overflow-hidden ">
+            <p
+              ref={hp_text}
+              className="text-[4.4vw] sm:text-[2.8vw] md:text-[1.6vw] font-Lausanne font-normal leading-normal capitalize tracking-wide overflow-hidden "
+            >
               {[
                 " Global digital design studio partnering with",
                 "brands and businesses that create exceptional",
                 "experiences where people live, work, and unwind.",
               ].map((item, i) => (
-                <div key={i} className="inline md:block overflow-hidden ">
-                  <motion.div
+                <span key={i} className="inline md:block overflow-hidden ">
+                  <motion.span
                     initial={{
                       rotate: 90,
                       y: "100%",
@@ -66,15 +153,19 @@ const HeroSection = () => {
                     className="inline md:block origin-left"
                   >
                     {item}
-                  </motion.div>
-                </div>
+                  </motion.span>
+                </span>
               ))}
             </p>
             <div className="mt-5 md:mt-16">
-              <h1 className="sm:-ml-5 max-w-min flex flex-col items-start">
-                {["Digital", "Design", "experience"].map((item, i) => (
+              <h1
+                id="headingText"
+                className="sm:-ml-5 max-w-min flex flex-col items-start"
+              >
+                {headingData.map((item, i) => (
                   <div key={i} className="overflow-hidden h-[17vw]">
                     <motion.div
+                      ref={item.ref}
                       initial={{
                         rotate: 90,
                         opacity: 1,
@@ -89,9 +180,9 @@ const HeroSection = () => {
                         duration: 0.9,
                         ease: [0.22, 1, 0.36, 1],
                       }}
-                      className="origin-top-left capitalize font-Lausanne font-normal text-[18vw] leading-[13vw] tracking-tighter"
+                      className="origin-left capitalize font-Lausanne font-normal text-[18vw] leading-[13vw] tracking-tighter"
                     >
-                      {item}
+                      {item.title}
                     </motion.div>
                   </div>
                 ))}

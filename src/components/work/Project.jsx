@@ -72,7 +72,10 @@ const Project = () => {
   ];
 
   return (
-    <div className="text-black bg-white max-w-screen-xl mx-auto px-5 sm:px-0 py-20 sm:py-36">
+    <div
+      id="section2"
+      className="text-black bg-white max-w-screen-xl mx-auto px-5 sm:px-0 py-20 sm:py-36"
+    >
       {/* project text*/}
       <div className="">
         <div className="flex sm:flex-col flex-col-reverse">
@@ -134,10 +137,10 @@ const Project = () => {
           {workData.map((item, i) => {
             return i !== 4 ? (
               <a
+                key={i}
                 data-scroll
                 data-scroll-speed={isMobile ? "0" : "-.2"}
                 href="#"
-                key={i}
                 className={`${boxClassName(i)} group relative`}
                 onMouseEnter={() =>
                   setIsMouseEnter((prev) => ({
@@ -203,6 +206,7 @@ const Project = () => {
               </a>
             ) : (
               <div
+                key={i}
                 className={`${boxClassName(
                   i
                 )} flex items-center justify-center`}

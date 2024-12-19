@@ -6,13 +6,13 @@ import Footer from "../shared/Footer";
 
 const Home = () => {
   return (
-    <>
+    <div data-scroll-container>
       <HeroSection />
       <Project />
       <HomeShowReel />
       <NewsHero />
       <Footer />
-    </>
+    </div>
   );
 };
 

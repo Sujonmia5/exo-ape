@@ -1,93 +1,55 @@
+import { UpdateFollower } from "react-mouse-follower";
+import { AppContext } from "../../context/context";
+import { useContext, useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useEffect, useRef } from "react";
-import { UpdateFollower } from "react-mouse-follower";
 
 const HomeShowReel = () => {
+  const { setIsOpen } = useContext(AppContext);
   const parentContainer = useRef(null);
   const videoElement = useRef(null);
   const textPlay = useRef(null);
   const textReel = useRef(null);
+
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
     const mm = gsap.matchMedia();
 
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: parentContainer.current,
+        start: "top top",
+        scrub: 2,
+        pin: true,
+        // pinSpacing: true,
+        markers: true,
+      },
+    });
+
     mm.add("(min-width: 768px)", () => {
       // Animations for desktop and larger devices
-
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: parentContainer.current,
-          start: "top 0",
-          scrub: 1,
-          pin: true,
-        },
-      });
-
-      tl.to(
-        videoElement.current,
-        {
-          width: "100%",
-          height: "100%",
-        },
-        "a"
-      );
-      tl.to(
-        textPlay.current,
-        {
-          x: 400,
-        },
-        "a"
-      );
-      tl.to(
-        textReel.current,
-        {
-          x: -400,
-        },
-        "a"
-      );
+      tl.to(videoElement.current, { width: "100%", height: "100%" }, "a");
+      tl.to(textPlay.current, { x: 400 }, "a");
+      tl.to(textReel.current, { x: -400 }, "a");
     });
-
     mm.add("(max-width: 767px)", () => {
-      // Animations for mobile and smaller devices
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: parentContainer.current,
-          start: "top 0",
-          scrub: 1,
-          pin: true,
-        },
-      });
+      // Animations for mobile and smaller device
 
-      tl.to(
-        videoElement.current,
-        {
-          width: "100%",
-          height: "40%",
-        },
-        "a"
-      );
-      tl.to(
-        textPlay.current,
-        {
-          x: 95,
-        },
-        "a"
-      );
-      tl.to(
-        textReel.current,
-        {
-          x: -95,
-        },
-        "a"
-      );
+      tl.to(videoElement.current, { width: "100%", height: "40%" }, "a");
+      tl.to(textPlay.current, { x: 95 }, "a");
+      tl.to(textReel.current, { x: -95 }, "a");
     });
-  });
+
+    return () => {
+      mm.revert();
+      // ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    };
+  }, []);
 
   return (
     <div
       ref={parentContainer}
-      className="w-full h-screen place-content-center sm:min-h-screen bg-black text-white"
+      className="w-full h-screen place-content-center bg-black text-white"
     >
       <UpdateFollower
         className="sample"
@@ -107,7 +69,10 @@ const HomeShowReel = () => {
           ),
         }}
       >
-        <div className="h-[70vh] sm:h-screen mx-auto relative">
+        <div
+          onClick={() => setIsOpen(true)}
+          className="h-[70vh] sm:min-h-screen mx-auto relative"
+        >
           {/* Reel text */}
           <div className="w-1/2 mx-auto h-full flex flex-col gap-10">
             <h1 className="text-center flex items-center justify-center gap-1 font-Lausanne text-base absolute left-1/2 -translate-x-1/2 top-10">
@@ -141,10 +106,10 @@ const HomeShowReel = () => {
               </div>
             </h1>
             <p className="font-Lausanne text-balance font-light absolute bottom-20 sm:bottom-44 left-1/2 -translate-x-1/2 w-full sm:w-2/6 text-center">
-              <div>
+              <span>
                 Our work is best experienced in motion. Don’t forget to put on
                 your headphones.
-              </div>
+              </span>
             </p>
           </div>
           <video
