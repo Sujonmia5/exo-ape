@@ -27,7 +27,6 @@ const ReelModal = () => {
         <div className="w-full h-full">
           <video
             autoPlay
-            muted
             loop
             //   controls
             onClick={() => setIsOpen(false)}
